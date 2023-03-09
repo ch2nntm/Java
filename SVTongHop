@@ -1,0 +1,310 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QLSV_B1
+{
+    abstract class SV
+    {
+        protected string hoten;
+        protected string msv;
+        protected int namsinh;
+
+        public SV()
+        {
+            hoten = "";
+            msv = "";
+            namsinh = 2000;
+        }
+
+        public SV(string ht, string msv, int ns)
+        {
+            hoten = ht;
+            msv = msv;
+            namsinh = ns;
+        }
+
+        public virtual void Nhap()
+        {
+            Console.WriteLine("Nhap ho ten: ");
+            hoten = Console.ReadLine();
+            Console.WriteLine("Nhap ma sv: ");
+            msv = Console.ReadLine();
+            Console.WriteLine("Nhap nam sinh: ");
+            namsinh = int.Parse(Console.ReadLine());
+        }
+
+        public virtual void hienThi()
+        {
+            Console.Write("Ho ten: {0} MSV: {1} - Nam sinh: {2}", hoten, msv, namsinh);
+        }
+
+        public virtual float diemTB()
+        {
+            return 0.0f;
+        }
+
+        public string hoTen()
+        {
+            return hoten;
+        }
+
+        abstract public string chuyenNganh();
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Collections;
+
+namespace QLSV_B1
+{
+    class SVCNTT:SV
+    {
+        private float Pascal;
+        private float C_Sharp;
+        private float SQL;
+
+        public SVCNTT():base()
+        {
+            Pascal = 0.0f;
+            C_Sharp = 0.0f;
+            SQL = 0.0f;
+        }
+
+        public SVCNTT(string ht, string msv, int ns, float ps, float c_s, float sql) : base(ht, msv, ns)
+        {
+            Pascal = ps;
+            C_Sharp = c_s;
+            SQL = sql;
+        }
+
+        public override void Nhap()
+        {
+            base.Nhap();
+            Console.WriteLine("Nhap diem Pascal: ");
+            Pascal = float.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem C_Sharp: ");
+            C_Sharp = float.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem SQL: ");
+            SQL = float.Parse(Console.ReadLine());
+        }
+
+        public override void hienThi()
+        {
+            base.hienThi();
+            Console.Write("Diem Pascal: {0} - Diem C_Sharp: {1} - Diem SQL: {2}", Pascal, C_Sharp, SQL);
+        }
+
+        public override float diemTB()
+        {
+            return (Pascal + C_Sharp + SQL) / 3;
+        }
+
+        public override string chuyenNganh()
+        {
+            return "CNTT";
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QLSV_B1
+{
+    class SVVatLy:SV
+    {
+        private float CoHoc;
+        private float DienHoc;
+        private float QuangHoc;
+        private float VLyHatNhan;
+
+        public SVVatLy() : base()
+        {
+            CoHoc = 0.0f;
+            DienHoc = 0.0f;
+            QuangHoc = 0.0f;
+            VLyHatNhan = 0.0f;
+        }
+
+        public SVVatLy(string ht, string msv, int ns, float ch, float dh, float qh, float vlhn) : base(ht, msv, ns)
+        {
+            CoHoc = ch;
+            DienHoc = dh;
+            QuangHoc = qh;
+            VLyHatNhan = vlhn;
+        }
+
+        public override void Nhap()
+        {
+            base.Nhap();
+            Console.WriteLine("Nhap diem co hoc: ");
+            CoHoc = int.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem dien hoc: ");
+            DienHoc = int.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem quang hoc: ");
+            QuangHoc = int.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem vat ly hat nhan: ");
+            VLyHatNhan = int.Parse(Console.ReadLine());
+        }
+
+        public override void hienThi()
+        {
+            base.hienThi();
+            Console.Write("Diem co hoc: {0} - Diem dien hoc: {1} - Diem quang hoc: {2} - Diem vat ly hat nhan: {3}", CoHoc, DienHoc, QuangHoc, VLyHatNhan);
+        }
+
+        public override float diemTB()
+        {
+            return (CoHoc + DienHoc + QuangHoc + VLyHatNhan) / 4;
+        }
+
+        public override string chuyenNganh()
+        {
+            return "VLy";
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QLSV_B1
+{
+    class SVVan:SV
+    {
+        private float VHCD;
+        private float VHHD;
+
+        public SVVan() : base(){
+            VHCD = 0.0f;
+            VHHD = 0.0f;
+        }
+
+        public SVVan(string ht, string msv, int ns, float cd, float hd) : base(ht,msv,ns)
+        {
+            VHCD = cd;
+            VHHD = hd;
+        }
+
+        public override void Nhap()
+        {
+            base.Nhap();
+            Console.WriteLine("Nhap diem van hoc co dien:");
+            VHCD = int.Parse(Console.ReadLine());
+            Console.WriteLine("Nhap diem van hoc hien dai:");
+            VHHD = int.Parse(Console.ReadLine());
+        }
+
+        public override void hienThi()
+        {
+            base.hienThi();
+            Console.Write("Diem VH co dien: {0} - Diem VH hien dai: {1}", VHCD, VHHD);
+        }
+
+        public override float diemTB()
+        {
+            return (VHCD + VHHD) / 2;
+        }
+
+        public override string chuyenNganh()
+        {
+            return "VHoc";
+        }
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QLSV_B1
+{
+    class DSSV
+    {
+        private SV[] ds;
+        public DSSV(int n)
+        {
+            ds = new SV[n];
+        }
+
+        public void them(SV x)
+        {
+            int m = ds.Length;
+            if (m<5)
+                ds[m++] = x;
+        }
+
+        public void LietKe()
+        {
+            for (int i = 0; i < ds.Length; i++)
+            {
+                ds[i].hienThi();
+                Console.WriteLine(" - Diem trung binh: {0}", ds[i].diemTB());
+            }
+        }
+
+        public void SVTren5()
+        {
+            for(int i=0; i<ds.Length; i++)
+            {
+                if (ds[i].diemTB() >= 5.0)
+                    Console.WriteLine("Ho ten: {0} - Chuyên ngành đào tạo: {1} - Điểm TB: {2}", ds[i].hoTen(), ds[i].chuyenNganh(), ds[i].diemTB());
+            }
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QLSV_B1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            DSSV ds = new DSSV(5);
+            SV a = new SVCNTT();
+            SV b = new SVVatLy();
+            SV c = new SVVan();
+
+            a.Nhap();
+            ds.them(a);
+            ds.LietKe();
+            Console.ReadKey();
+        }
+    }
+}
