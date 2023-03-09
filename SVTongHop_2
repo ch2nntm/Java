@@ -1,0 +1,229 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SVTH_B2
+{
+    abstract class SV
+    {
+        protected string hoTen;
+        protected int namSinh;
+        protected float diemTB;
+
+        public SV()
+        {
+            hoTen = "";
+            namSinh = 1990;
+            diemTB = 0.0f;
+        }
+
+        public SV(string ht, int ns, float dtb)
+        {
+            hoTen = ht;
+            namSinh = ns;
+            diemTB = dtb;
+        }
+
+        public virtual void hienThi()
+        {
+            Console.Write("Họ tên: {0} - Năm sinh: {1} - Điểm TB: {2}", hoTen, namSinh, diemTB);
+        }
+
+        public string hoten()
+        {
+            return hoTen;
+        }
+
+        public virtual string loaiSV()
+        {
+            return "";
+        }
+
+        abstract public string duocTN();
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SVTH_B2
+{
+    class SVSP:SV
+    {
+        private string noiTT;
+        private float diemTT;
+
+        public SVSP() : base()
+        {
+            noiTT = "";
+            diemTT = 0.0f;
+        }
+
+        public SVSP(string ht, int ns, float dtb, string ntt, float dtt) : base(ht, ns, dtb)
+        {
+            noiTT = ntt;
+            diemTB = dtt;
+        }
+
+        public override void hienThi()
+        {
+            base.hienThi();
+            Console.Write(" - Noi TT: {0} - Diem TT: {1}", noiTT, diemTT);
+        }
+
+        public override string loaiSV()
+        {
+            return "SP";
+        }
+
+        public override string duocTN()
+        {
+            if (diemTT >= 5)
+                return "Duoc TN";
+            return "Khong TN";
+        }
+    }
+}
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SVTH_B2
+{
+    class SVTH:SV
+    {
+        private string tenDT;
+        private float diemDT;
+
+        public SVTH() : base()
+        {
+            tenDT = "";
+            diemDT = 0.0f;
+        }
+
+        public SVTH(string ht, int ns, float dtb, string tdt, float ddt):base(ht, ns, dtb)
+        {
+            tenDT = tdt;
+            diemDT = ddt;
+        }
+
+        public override void hienThi()
+        {
+            base.hienThi();
+            Console.Write(" - Ten DT: {0} - Diem DT: {1}", tenDT, diemDT);
+        }
+
+        public override string loaiSV()
+        {
+            return "TH";
+        }
+
+        public override string duocTN()
+        {
+            if (diemDT >= 5)
+                return "Duoc TN";
+            return "Khong TN";
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SVTH_B2
+{
+    class DSSV
+    {
+        private SV[] ds;
+
+        public DSSV(int n)
+        {
+            ds = new SV[n];
+        }
+
+        public void them(SV x) ////////////////////////////////////////////
+        {
+
+        }
+
+        public void tim(string x)
+        {
+            for(int i=0; i<ds.Length; i++)
+            {
+                if (ds[i].hoten().Equals(x))
+                    ds[i].hienThi();
+            }
+        }
+
+        public void xoa(string x) //////////////////////////////////////////////////////////
+        {
+            int n = ds.Length;
+            for(int i=0; i < n; i++)
+            {
+                if (ds[i].hoten().Equals(x))
+                {
+                    ds[i] = ds[i + 1];
+                }
+            }
+        }
+
+        public void inDS()
+        {
+            for(int i=0; i < ds.Length; i++)
+            {
+                ds[i].hienThi();
+                Console.WriteLine();
+            }
+        }
+
+        public void inDSTheoLoaiSV(string loaiSV)
+        {
+            for(int i=0; i<ds.Length; i++)
+            {
+                if (ds[i].loaiSV().Equals(loaiSV))
+                    ds[i].hienThi();
+            }
+        }
+    }
+}
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SVTH_B2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+        }
+    }
+}
